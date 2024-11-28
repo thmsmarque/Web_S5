@@ -1,0 +1,55 @@
+.boite-inscription {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 70%;
+    display: flex;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #423c3c;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"] {
+    background-color: rgba(216, 216, 216, 0.5);
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    width: calc(100% - 22px); 
+}
+
+input[type="submit"] {
+    background-color: #f8f7eb;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    width: calc(80% - 22px);
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+        background-color: #e0dfd1;
+        transition: background-color 0.3s ease;
+    }
+
+
+
+body {
+    background-color: #c9c6c6;
+    font-family: 'Georgia', fantasy;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.titre {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}

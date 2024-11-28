@@ -2,7 +2,7 @@
 $hostname = "sql308.byethost16.com";
 $username = "b16_37711947";
 $password = "";
-$db_name = "b16_37711947_drinkdrink";
+$db_name = "b16_37711947_users";
 
 echo "test";
 
