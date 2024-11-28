@@ -7,10 +7,12 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
     exit();
 }
 
-$hostname = "localhost";
-$usernamedb = "root";
-$passworddb = "";
-$db_name = "drinkdrink_users";
+$username = "doadmin";
+$password ="" ;
+
+$hostname = "db-postgresql-fra1-67877-do-user-18442126-0.f.db.ondigitalocean.com";
+$port = "25060";
+$db_name = "users";
 
 $conn = mysqli_connect($hostname, $usernamedb, $passworddb, $db_name);
 
