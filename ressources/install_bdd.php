@@ -1,6 +1,6 @@
 <?php
 $username = "doadmin";
-$password ="" ;
+$password = "";
 
 $hostname = "db-postgresql-fra1-67877-do-user-18442126-0.f.db.ondigitalocean.com";
 $port = "25060";
@@ -25,9 +25,9 @@ $queri = "CREATE TABLE users (
     sexe VARCHAR(1) CHECK (sexe IN ('M', 'F', 'O'))
     )";
 
-if(pg_exec($conn, $queri)){
+if (pg_exec($conn, $queri)) {
     echo "Table users created successfully";
-}else{
+} else {
     echo "Error creating table: " . pg_last_error();
 }
 

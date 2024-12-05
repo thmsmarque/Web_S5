@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['activeUser'])){
+if (!isset($_SESSION['activeUser'])) {
     $_SESSION['errorConnexion'] = 'Vous devez être connecté pour accéder à cette page';
     header("Location: index.php");
     exit();
@@ -8,7 +8,7 @@ if(!isset($_SESSION['activeUser'])){
 
 
 $usernamedb = "doadmin";
-$passworddb ="AVNS_DMhcFupGGjku7Gy1nMn" ;
+$passworddb = "AVNS_DMhcFupGGjku7Gy1nMn";
 
 $hostname = "db-postgresql-fra1-67877-do-user-18442126-0.f.db.ondigitalocean.com";
 $port = "25060";
@@ -38,6 +38,7 @@ if (pg_num_rows($result) > 0) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,17 +46,21 @@ if (pg_num_rows($result) > 0) {
 
     <link rel="stylesheet" href="profil-page.css">
 </head>
+
 <body>
     <header>
         <div class=bouton-retour-profil>
             <a href="index.php">Retour à la page principale</a>
         </div>
         <div class="bouton-deconnexion">
-        <form>
-         <input type="deconnexion" value="deconnexion" onclick="window.location.href ='deconnexion_form.php'" style="color:red"></input>
-        </form>
+            <form>
+                <input type="deconnexion" value="deconnexion" onclick="window.location.href ='deconnexion_form.php'"
+                    style="color:red"></input>
+            </form>
         </div>
     </header>
-    <h1>Profil de <?php echo $row['prenom']; $row['nom']; ?></h1>
+    <h1>Profil de <?php echo $row['prenom'];
+    $row['nom']; ?></h1>
 </body>
+
 </html>
