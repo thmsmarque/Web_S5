@@ -2,13 +2,12 @@
 session_start();
 
 
-
-if(empty($_POST['prenom']) || empty($_POST['nom']) || empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
+if (empty($_POST['prenom']) || empty($_POST['nom']) || empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
     $_SESSION['error'] = 'Veuillez remplir tous les champs';
     header("Location: inscription.php");
     $_SESSION['form_data'] = $_POST;
     exit();
-}else{
+} else {
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];
     $username = $_POST['username'];
@@ -17,7 +16,7 @@ if(empty($_POST['prenom']) || empty($_POST['nom']) || empty($_POST['username']) 
 }
 
 $usernamedb = "doadmin";
-$passworddb ="AVNS_DMhcFupGGjku7Gy1nMn" ;
+$passworddb = "AVNS_DMhcFupGGjku7Gy1nMn";
 
 $hostname = "db-postgresql-fra1-67877-do-user-18442126-0.f.db.ondigitalocean.com";
 $port = "25060";
