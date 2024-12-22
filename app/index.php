@@ -77,20 +77,21 @@
 
         </div>
     </header>
-    <main> <!-- Contenu de la page -->
-        <article class="recette_contenu">
-            <article class="titre_recette">
-                <?php
-                include '../ressources/Donnees.inc.php';
-                /* Récupérer les titres : */
-                foreach ($Recettes as $recette) {
-                    echo $recette['titre'];
-                    echo "<br>";
-                }
-                ?>
-            </article>
-        </article>
-    </main>
+   <main>
+    <!-- Contenu de la page -->
+    <article class="recette_contenu">
+        <div class="grille_recettes">
+            <?php
+            include '../ressources/Donnees.inc.php';
+            foreach ($Recettes as $recette) {
+                echo '<div class="boite_recette">';
+                echo htmlspecialchars($recette['titre']); 
+                echo '</div>';
+            }
+            ?>
+        </div>
+    </article>
+</main>
 </body>
 
 </html>

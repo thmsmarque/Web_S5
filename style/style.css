@@ -10,3 +10,31 @@
   padding: 0.2rem;
   background-color: #f8f7eb;
 }
+
+/* Conteneur pour la grille */
+.grille_recettes {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* les colonnes s'adaptent à la taille */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Style des boîtes */
+.boite_recette {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s; /* animation quand on passe la souris */
+}
+
+/* Effet autour des boîtes */
+.boite_recette:hover {
+  transform: scale(1.05); /* augmenter la taille */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* augmenter l'ombre */
+}
