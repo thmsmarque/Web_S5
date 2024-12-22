@@ -4,7 +4,7 @@ session_start();
 
 if (empty($_POST['prenom']) || empty($_POST['nom']) || empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
     $_SESSION['error'] = 'Veuillez remplir tous les champs';
-    header("Location: inscription.php");
+    header("Location: ./inscription.php");
     $_SESSION['form_data'] = $_POST;
     exit();
 } else {
@@ -27,7 +27,7 @@ $conn = pg_connect("host=$hostname port=$port dbname=$db_name user=$usernamedb p
 if (!$conn) {
     die("Erreur de connexion : " . pg_last_error());
     $_SESSION['error'] = 'Une erreur est survenue, veuillez réessayer plus tard';
-    header("Location: inscription.php");
+    header("Location: ./inscription.php");
     exit();
 }
 
@@ -37,7 +37,7 @@ $queryRequest = "SELECT * FROM users WHERE upper(email) like ('$email')";
 $result = pg_query($conn, $queryRequest);
 if (pg_num_rows($result) > 0) {
     $_SESSION['error'] = 'Cet email est déjà utilisé';
-    header("Location: inscription.php");
+    header("Location: ./inscription.php");
     exit();
 }
 //Test si le nom d'utilisateur est déjà utilisé
@@ -45,7 +45,7 @@ $queryRequest = "SELECT * FROM users WHERE upper(username) like upper('$username
 $result = pg_exec($conn, $queryRequest);
 if (pg_num_rows($result) > 0) {
     $_SESSION['error'] = 'Ce nom d\'utilisateur est déjà utilisé';
-    header("Location: inscription.php");
+    header("Location: ./inscription.php");
     exit();
 }
 
@@ -57,7 +57,7 @@ if (pg_query($conn, $queryRequest)) {
     exit();
 } else {
     $_SESSION['error'] = 'Une erreur est survenue, veuillez réessayer plus tard';
-    header("Location: inscription.php");
+    header("Location: ./inscription.php");
     exit();
 }
 ?>

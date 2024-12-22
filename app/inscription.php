@@ -16,7 +16,7 @@ session_start();
 <body>
     <a href="index.php" class="back-button">Retour à la page principale</a>
     <div class="boite-inscription" style='text-align:center'>
-        <form action="inscription_form.php" method="post">
+        <form action="form_back/inscription_form.php" method="post">
             <div class="titre">Inscription</div>
             <div class="error">
                 <?php

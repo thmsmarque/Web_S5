@@ -3,7 +3,7 @@ session_start();
 
 if (empty($_POST['username']) || empty($_POST['password'])) {
     $_SESSION['errorConnexion'] = 'Veuillez remplir tous les champs';
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit();
 }
 
@@ -19,7 +19,7 @@ $conn = pg_connect("host=$hostname port=$port dbname=$db_name user=$usernamedb p
 if (!$conn) {
     die("Erreur de connexion : " . pg_last_error());
     $_SESSION['error'] = 'Une erreur est survenue, veuillez réessayer plus tard';
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit();
 }
 
@@ -31,11 +31,11 @@ $result = pg_query($conn, $queryRequest);
 if (pg_num_rows($result) > 0) {
     #$_SESSION['isRegistered'] = true;
     $_SESSION['activeUser'] = $username;
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit();
 } else {
     $_SESSION['errorConnexion'] = 'Nom d\'utilisateur ou mot de passe incorrect';
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit();
 }
 
