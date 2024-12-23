@@ -1,5 +1,5 @@
 header{
-    background-color: #d50202;
+    background-color: #f8f7eb;
     padding: 10px;
     text-align: center;
     font-size: 20px;
@@ -9,6 +9,32 @@ header{
     justify-content: center;
 }
 
+.grille_boisson {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(200px, 1fr)
+    ); /* les colonnes s'adaptent à la taille */
+    gap: 20px;
+    padding: 20px;
+  }
+
+.boissons_favorites{
+    background-color: #f8f7eb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.boisson_panneau {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s; /* animation quand on passe la souris */
+  }
 
 .bouton-deconnexion
 {
@@ -21,7 +47,7 @@ align-self: flex-end;
 }
 
 body{
-    background-color: #f7c7c7;
+    background-color: #f8f7eb;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;

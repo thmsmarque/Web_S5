@@ -46,6 +46,11 @@ function get_super_cat_de($conn, $cat) {
     return $supercategories;
 }
 
+/**
+ * Récupère les boissons d'une catégorie
+ * @param PDO $conn
+ * @param string $cat
+ */
 function get_boisson_from_cat($conn, $cat) {
     $id = getid_from_cat($conn, $cat);
     $query = "SELECT b.titre, b.ingredients, b.preparation
@@ -58,7 +63,10 @@ function get_boisson_from_cat($conn, $cat) {
     return $boissons;
 }
 
-
+/* Récupère les boissons d'une sous-catégorie
+ * @param PDO $conn
+ * @param string $cat
+ */
 function getid_from_cat($conn, $cat) {
     $query = "SELECT c.id_categorie
         FROM categories c
@@ -66,4 +74,18 @@ function getid_from_cat($conn, $cat) {
     $stmt = $conn->query($query);
     $id = $stmt->fetchColumn();
     return $id;
+}
+
+/**
+ * Récupère la boisson correspondante à un id
+ * @param PDO $conn
+ * @param int $id
+ */
+function get_boisson_from_id($conn, $id) {
+    $query = "SELECT titre, ingredients, preparation
+        FROM boissons
+        WHERE id_boisson = $id";
+    $stmt = $conn->query($query);
+    $boisson = $stmt->fetch();
+    return $boisson;
 }

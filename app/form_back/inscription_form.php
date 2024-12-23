@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../../ressources/bdd/config_bdd.php';
 
 if (empty($_POST['prenom']) || empty($_POST['nom']) || empty($_POST['username']) || empty($_POST['email']) || empty($_POST['password'])) {
     $_SESSION['error'] = 'Veuillez remplir tous les champs';
@@ -15,49 +15,40 @@ if (empty($_POST['prenom']) || empty($_POST['nom']) || empty($_POST['username'])
     $password = $_POST['password'];
 }
 
-$usernamedb = "doadmin";
-$passworddb = "AVNS_DMhcFupGGjku7Gy1nMn";
 
-$hostname = "db-postgresql-fra1-67877-do-user-18442126-0.f.db.ondigitalocean.com";
-$port = "25060";
-$db_name = "users";
 
-$conn = mysqli_connect($hostname, $username, $password, $db_name, $port);
-
-if (!$conn) {
-    die("Erreur de connexion : " . pg_last_error());
-    $_SESSION['error'] = 'Une erreur est survenue, veuillez réessayer plus tard';
-    header("Location: ./inscription.php");
-    exit();
-}
+$conn = get_db_connection($db_config);
 
 
 //Test si l'mail est déjà utilisé
 $queryRequest = "SELECT * FROM users WHERE upper(email) like ('$email')";
-$result = pg_query($conn, $queryRequest);
-if (pg_num_rows($result) > 0) {
+$stmt = $conn -> query($queryRequest);
+if ($stmt->rowCount() > 0) {
     $_SESSION['error'] = 'Cet email est déjà utilisé';
-    header("Location: ./inscription.php");
+    header("Location: ../inscription.php");
     exit();
 }
 //Test si le nom d'utilisateur est déjà utilisé
 $queryRequest = "SELECT * FROM users WHERE upper(username) like upper('$username')";
-$result = pg_exec($conn, $queryRequest);
-if (pg_num_rows($result) > 0) {
+$stmt = $conn -> query($queryRequest);
+if ($stmt->rowCount() > 0) {
     $_SESSION['error'] = 'Ce nom d\'utilisateur est déjà utilisé';
-    header("Location: ./inscription.php");
+    header("Location: ../inscription.php");
     exit();
 }
 
+// Hacher le mot de passe
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
 //Sinon on inscrit l'utilisateur
-$queryRequest = "INSERT INTO users (prenom, nom, username, email, password) VALUES ('$prenom', '$nom', '$username', '$email', '$password')";
-if (pg_query($conn, $queryRequest)) {
+$queryRequest = "INSERT INTO users (prenom, nom, username, email, password) VALUES ('$prenom', '$nom', '$username', '$email', '$hashedPassword')";
+if ($conn->exec($queryRequest)) {
     $_SESSION['error'] = 'Inscription réussie';
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 } else {
     $_SESSION['error'] = 'Une erreur est survenue, veuillez réessayer plus tard';
-    header("Location: ./inscription.php");
+    header("Location: ../inscription.php");
     exit();
 }
 ?>

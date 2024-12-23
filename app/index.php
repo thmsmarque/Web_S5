@@ -67,14 +67,14 @@
                             unset($_SESSION['errorConnexion']);
                         }
                         ?>
-                    <form action="form_back/connexion_form.php" method="post">
+                    <form action="./form_back/connexion_form.php" method="post">
                         <?php
                         #echo($_SESSION['isRegistered']);
                         #echo(isset($_SESSION['isRegistered']));
                         #echo($_SESSION["activeUser"]);
                         if (isset($_SESSION['activeUser'])) {
                             #echo '<button type="button" onclick="deconnexion()">Déconnexion</button>';
-                            echo'<a href="form_back/profil.php" class="deconnexion">Profil</a>';
+                            echo'<a href="./profil.php" class="deconnexion">Profil</a>';
                         } else {
                             echo '<div class="inputfields-for-login"><input type="text" name="username" id="username" placeholder="Nom d\'utilisateur"><input type="password" name="password" id="password" placeholder="Mot de passe">';
                             echo '<button type="submit"}">Connexion</button>';

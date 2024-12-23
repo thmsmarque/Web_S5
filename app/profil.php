@@ -6,34 +6,28 @@ if (!isset($_SESSION['activeUser'])) {
     exit();
 }
 
+include '../ressources/bdd/config_bdd.php';
 
-$usernamedb = "doadmin";
-$passworddb = "AVNS_DMhcFupGGjku7Gy1nMn";
-
-$hostname = "db-postgresql-fra1-67877-do-user-18442126-0.f.db.ondigitalocean.com";
-$port = "25060";
-$db_name = "users";
-
-$conn = mysqli_connect($hostname, $username, $password, $db_name, $port);
-
-if (!$conn) {
-    die("Erreur de connexion : " . pg_last_error());
-    $_SESSION['errorConnexion'] = 'Une erreur est survenue, veuillez réessayer plus tard';
-    header("Location: index.php");
-    exit();
-}
+$conn = get_db_connection($db_config);
 
 
 $queryRequest = "SELECT * FROM users WHERE username = '" . $_SESSION['activeUser'] . "'";
-$result = pg_query($conn, $queryRequest);
-if (pg_num_rows($result) > 0) {
-    $row = pg_fetch_assoc($result);
+$result = $conn->query($queryRequest);
+if ($result->rowCount() > 0) {
+    $infos = $result->fetch();
 } else {
     $_SESSION['errorConnexion'] = 'Une erreur est survenue, veuillez réessayer plus tard';
     header("Location: index.php");
     exit();
 }
 
+$queryRequest = "SELECT * FROM preferer WHERE username = '" . $_SESSION['activeUser'] . "'";
+$result = $conn->query($queryRequest);
+if ($result->rowCount() > 0) {
+    $boissons = $result->fetchAll();
+} else {
+    $boissons = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +38,7 @@ if (pg_num_rows($result) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil de</title>
 
-    <link rel="stylesheet" href="profil-page.css">
+    <link rel="stylesheet" href="../style/profil-page.css">
 </head>
 
 <body>
@@ -54,13 +48,28 @@ if (pg_num_rows($result) > 0) {
         </div>
         <div class="bouton-deconnexion">
             <form>
-                <input type="deconnexion" value="deconnexion" onclick="window.location.href ='deconnexion_form.php'"
+                <input type="deconnexion" value="deconnexion" onclick="window.location.href ='./form_back/deconnexion_form.php'"
                     style="color:red"></input>
             </form>
         </div>
     </header>
-    <h1>Profil de <?php echo $row['prenom'];
-    $row['nom']; ?></h1>
+    <h1>Profil de <?php echo $infos['prenom'];
+    $infos['nom']; ?></h1>
+
+    <div class="boissons_favorites">
+    
+    <div class="grille_boisson"></div>
+    <?php
+    foreach($boissons as $boisson) {
+    $boisson_infos = get_boisson_from_id($conn, $boisson['id_boisson']);
+    echo '<div class="boisson_panneau">';
+    echo '<h2>' . $boisson_infos['titre'] . '</h2>';
+    echo '</div>';
+    }
+
+    ?>
+    </div>
+    </div>
 </body>
 
 </html>
