@@ -27,8 +27,8 @@ function get_db_connection($config) {
 function get_sous_cat_de($conn, $cat) {
     $query = "SELECT c2.nom AS sous_categorie
         FROM categories c1
-        JOIN souscategorie sc ON c1.id = sc.parent
-        JOIN categories c2 ON sc.enfant = c2.id
+        JOIN souscategorie sc ON c1.id_categorie = sc.parent
+        JOIN categories c2 ON sc.enfant = c2.id_categorie
         WHERE upper(c1.nom) = upper('$cat')";
     $stmt = $conn->query($query);
     $souscategories = $stmt->fetchAll();
@@ -38,8 +38,8 @@ function get_sous_cat_de($conn, $cat) {
 function get_super_cat_de($conn, $cat) {
     $query = "SELECT c2.nom AS super_categorie
         FROM categories c1
-        JOIN supercategorie sc ON c1.id = sc.parent
-        JOIN categories c2 ON sc.enfant = c2.id
+        JOIN supercategorie sc ON c1.id_categorie = sc.parent
+        JOIN categories c2 ON sc.supercat = c2.id_categorie
         WHERE upper(c1.nom) = upper('$cat')";
     $stmt = $conn->query($query);
     $supercategories = $stmt->fetchAll();
@@ -50,9 +50,9 @@ function get_boisson_from_cat($conn, $cat) {
     $id = getid_from_cat($conn, $cat);
     $query = "SELECT b.titre, b.ingredients, b.preparation
         FROM boissons b
-        JOIN appartenir a ON b.id = a.id_boisson
-        JOIN categories c ON a.id_categorie = c.id
-        WHERE c.id = '$id'";
+        JOIN appartenir a ON b.id_boisson = a.id_boisson
+        JOIN categories c ON a.id_categorie = c.id_categorie
+        WHERE c.id_categorie = '$id'";
     $stmt = $conn->query($query);
     $boissons = $stmt->fetchAll();
     return $boissons;
@@ -60,7 +60,7 @@ function get_boisson_from_cat($conn, $cat) {
 
 
 function getid_from_cat($conn, $cat) {
-    $query = "SELECT c.id
+    $query = "SELECT c.id_categorie
         FROM categories c
         WHERE upper(c.nom) = upper('$cat')";
     $stmt = $conn->query($query);

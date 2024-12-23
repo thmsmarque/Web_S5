@@ -5,10 +5,10 @@ include './config_bdd.php';
 $conn = get_db_connection($db_config);
 
 
+/*
 
-
-/*$queries = [
-    /*"CREATE TABLE users (
+$queries = [
+    "CREATE TABLE users (
         username VARCHAR(50) NOT NULL PRIMARY KEY,
         prenom VARCHAR(30) NOT NULL,
         nom VARCHAR(30) NOT NULL,
@@ -19,37 +19,37 @@ $conn = get_db_connection($db_config);
         sexe VARCHAR(1) CHECK (sexe IN ('M', 'F', 'O'))
     )",
     "CREATE TABLE boissons (
-        id SERIAL PRIMARY KEY,
-        titre VARCHAR(50) NOT NULL,
-        ingredients VARCHAR(100) NOT NULL,
-        preparation VARCHAR(100) NOT NULL
+        id_boisson SERIAL PRIMARY KEY,
+        titre VARCHAR(200) NOT NULL,
+        ingredients VARCHAR(1000) NOT NULL,
+        preparation VARCHAR(1000) NOT NULL
     )",
     "CREATE TABLE categories (
-        id SERIAL PRIMARY KEY,
+        id_categorie SERIAL PRIMARY KEY,
         nom VARCHAR(50) NOT NULL
     )",
     "CREATE TABLE appartenir (
-        id_boisson INT REFERENCES boissons(id),
-        id_categorie INT REFERENCES categories(id),
+        id_boisson INT REFERENCES boissons(id_boisson),
+        id_categorie INT REFERENCES categories(id_categorie),
         index_level INTEGER,
         primary key(id_boisson, id_categorie)
     )",
     "CREATE TABLE preferer (
         username VARCHAR(50) REFERENCES users(username),
-        id_boisson INT REFERENCES boissons(id),
+        id_boisson INT REFERENCES boissons(id_boisson),
         PRIMARY KEY (username, id_boisson)
     )",
     "CREATE TABLE souscategorie(
-        parent INT REFERENCES categories(id),
-        enfant INT REFERENCES categories(id),
+        parent INT REFERENCES categories(id_categorie),
+        enfant INT REFERENCES categories(id_categorie),
         index_level INTEGER,
         primary key(parent, enfant)
     )",
     "CREATE TABLE supercategorie(
-        parent INT REFERENCES categories(id),
-        enfant INT REFERENCES categories(id),
+        parent INT REFERENCES categories(id_categorie),
+        supercat INT REFERENCES categories(id_categorie),
         index_level INTEGER,
-        primary key(parent, enfant)
+        primary key(parent, supercat)
     )"
 ];
 
@@ -61,10 +61,10 @@ $conn = get_db_connection($db_config);
         } else {
             echo "Tables created successfully";
         }
-    }*/
+    }
     include './Donnees.inc.php';
 
-    /*foreach($Hierarchie as $categorie => $souscategories){
+    foreach($Hierarchie as $categorie => $souscategories){
         echo "Categorie : ".$categorie."<br>";
     }
 
@@ -100,7 +100,7 @@ $conn = get_db_connection($db_config);
                     echo "Super-categorie : ".$supercategorie."<br>";
                     $parent_id = $categories[$categorie];
                     $enfant_id = $categories[$supercategorie];
-                    $query = "INSERT INTO supercategorie (parent, enfant, index_level) VALUES ($parent_id, $enfant_id,$index_level)";
+                    $query = "INSERT INTO supercategorie (parent, supercat, index_level) VALUES ($parent_id, $enfant_id,$index_level)";
                     $conn->exec($query);
                     $index_level++;
                 }
