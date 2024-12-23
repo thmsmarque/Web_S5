@@ -14,7 +14,7 @@ $hostname = "db-postgresql-fra1-67877-do-user-18442126-0.f.db.ondigitalocean.com
 $port = "25060";
 $db_name = "users";
 
-$conn = pg_connect("host=$hostname port=$port dbname=$db_name user=$usernamedb password=$passworddb");
+$conn = mysqli_connect($hostname, $username, $password, $db_name, $port);
 
 if (!$conn) {
     die("Erreur de connexion : " . pg_last_error());
