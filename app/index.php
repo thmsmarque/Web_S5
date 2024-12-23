@@ -95,7 +95,7 @@
     <article class="recette_contenu">
         <div class="grille_recettes">
             <?php
-            include '../ressources/Donnees.inc.php';
+            include '../ressources/bdd/Donnees.inc.php';
             foreach ($Recettes as $recette) {
                 echo '<div class="boite_recette">';
                 echo htmlspecialchars($recette['titre']); 
