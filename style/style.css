@@ -1,3 +1,9 @@
+body {
+  display: flex;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 .recette_contenu {
   border-radius: 30px;
   margin: 1rem;
@@ -11,7 +17,6 @@
   background-color: #f8f7eb;
 }
 
-/* Conteneur pour la grille */
 .grille_recettes {
   display: grid;
   grid-template-columns: repeat(
@@ -22,7 +27,6 @@
   padding: 20px;
 }
 
-/* Style des boîtes */
 .boite_recette {
   background-color: #f8f9fa;
   border: 1px solid #ddd;
@@ -33,8 +37,50 @@
   transition: transform 0.2s, box-shadow 0.2s; /* animation quand on passe la souris */
 }
 
-/* Effet autour des boîtes */
 .boite_recette:hover {
   transform: scale(1.05); /* augmenter la taille */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* augmenter l'ombre */
+}
+
+/*  barre latérale */
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  position: fixed;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 10px 0;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  color: #007bff;
+}
+
+.content {
+  margin-left: 270px;
+
+  padding: 20px;
+  width: 100%;
 }
