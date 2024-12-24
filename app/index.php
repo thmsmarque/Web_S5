@@ -97,10 +97,18 @@
             <?php
             include '../ressources/bdd/Donnees.inc.php';
             foreach ($Recettes as $recette) {
+                $titre = $recette['titre'];
+
+                // l'image existe dans le tableau
+                $imagePath = isset($recette['image']) ? '../ressources/Photos/' . $recette['image'] : '../ressources/Photos/default.jpg';
+
+                
                 echo '<div class="boite_recette">';
-                echo htmlspecialchars($recette['titre']); 
+                echo '<h3>' . htmlspecialchars($titre) . '</h3>';
+                // afficher image
+                echo '<img src="' . htmlspecialchars($imagePath) . '" alt="Une délicieuse boisson ...">';
                 echo '</div>';
-            }
+                    }
             ?>
         </div>
     </article>

@@ -20,18 +20,20 @@ body {
 .grille_recettes {
   display: grid;
   grid-template-columns: repeat(
-    auto-fit,
-    minmax(200px, 1fr)
+    auto-fill,
+    minmax(250px, 1fr)
   ); /* les colonnes s'adaptent à la taille */
   gap: 20px;
   padding: 20px;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .boite_recette {
   background-color: #f8f9fa;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 10px 15px;
+  padding: 15px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s; /* animation quand on passe la souris */
@@ -80,7 +82,15 @@ body {
 
 .content {
   margin-left: 270px;
-
   padding: 20px;
+  width: calc(100% - 270px);
+}
+
+.boite_recette img {
   width: 100%;
+  height: auto;
+  max-height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
