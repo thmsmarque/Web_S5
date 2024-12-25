@@ -36,14 +36,46 @@
 
 <body>
     <div class="sidebar">
-            <h2>Ingrédients</h2>
-            <ul>
-               test
-            <br>
-               test 3
-               <br>
-               test 4
-               <br>
+        <h2>Les populaires : </h2>
+        <ul>
+            <?php
+            include '../ressources/bdd/config_bdd.php';
+
+            $conn = get_db_connection($db_config);
+//---------------------------------------------
+/*
+             // afficher les liquides
+             $souscategories = get_sous_cat_de($conn, 'Alcool');
+             foreach ($souscategories as $souscategorie) {
+                 echo $souscategorie['sous_categorie'] . "<br>";
+
+                 $boissons = get_boisson_from_cat($conn, $souscategorie['sous_categorie']);
+                 foreach ($boissons as $boisson) {
+                     echo "-- ".$boisson['titre'] . "<br>";
+                 }
+//PROBLEME AVEC LA BDD A REVOIR
+             }
+*/
+//---------------------------------------------
+
+            // afficher les liquides
+            $souscategories = get_sous_cat_de($conn, 'Liquide');
+                foreach ($souscategories as $souscategorie) {
+                    echo $souscategorie['sous_categorie'] . "<br>";
+
+                    $boissons = get_boisson_from_cat($conn, $souscategorie['sous_categorie']);
+                    foreach ($boissons as $boisson) {
+                        echo "-- ".$boisson['titre'] . "<br>";
+                    }
+            }
+
+
+                  
+                
+            
+
+                $conn = null; // Close connection
+            ?>
         </ul>
     </div>
     <div class="content">
